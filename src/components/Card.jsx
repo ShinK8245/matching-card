@@ -15,7 +15,7 @@ const Card = () => {
         },
       }}
     >
-      <img src={"/assets/23.png"} alt={"card1"} loading="lazy" height="100%" />
+      <img src={"/assets/24.png"} alt={"card1"} loading="lazy" height="100%" />
     </Box>
   );
 };
