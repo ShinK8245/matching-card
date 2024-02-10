@@ -1,5 +1,13 @@
+import Navbar from "./components/Navbar";
+import { CardGrid } from "./components/CardGrid";
+
 function App() {
-  return <div>Hello World</div>;
+  return (
+    <>
+      <Navbar />
+      <CardGrid />
+    </>
+  );
 }
 
 export default App;
