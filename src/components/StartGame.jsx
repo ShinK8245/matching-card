@@ -112,7 +112,7 @@ const StartGame = () => {
         }}
         onClick={handleStartGame}
       >
-        Start The Game
+        Start Game
       </Button>
     </Box>
   );
@@ -123,6 +123,6 @@ export { StartGame };
 const radioStyle = {
   color: grey[400],
   "&.Mui-checked": {
-    color: grey[400],
+    color: grey[200],
   },
 };
