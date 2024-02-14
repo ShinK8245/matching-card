@@ -10,21 +10,19 @@ const CardGrid = () => {
   const gridContainerWidth = columns * 100 + (columns - 1) * 8;
 
   return (
-    <Box display="flex" justifyContent="center" mt={5}>
-      <Box
-        id="card-container"
-        sx={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${columns}, 1fr)`,
-          justifyItems: "center",
-          gap: 1,
-          width: gridContainerWidth,
-        }}
-      >
-        {cardData.map((cardDataItem) => {
-          return <Card key={cardDataItem.id} data={cardDataItem} />;
-        })}
-      </Box>
+    <Box
+      id="card-container"
+      sx={{
+        display: "grid",
+        gridTemplateColumns: `repeat(${columns}, 1fr)`,
+        justifyItems: "center",
+        gap: 1,
+        width: gridContainerWidth,
+      }}
+    >
+      {cardData.map((cardDataItem) => {
+        return <Card key={cardDataItem.id} data={cardDataItem} />;
+      })}
     </Box>
   );
 };

@@ -1,60 +1,116 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import { generateCardData } from "../utils";
+import { Levels, Speeds } from "../constants";
 
 const CardDataContext = createContext();
 
 const CardDataContextProvider = ({ children }) => {
-  const numberOfCards = 36;
-  const [cardData, setCardData] = useState(generateCardData(numberOfCards));
-  const [flippedCards, setFlippedCards] = useState([]);
-  const [isClickable, setIsClickable] = useState(true);
+  const [gameStarted, setGameStarted] = useState(false);
 
-  useEffect(() => {
-    if (flippedCards.length === 2) {
-      const [firstCard, secondCard] = flippedCards;
-      const match = firstCard.imageUrl === secondCard.imageUrl;
+  const [level, setLevel] = useState(Levels["4x4"]);
+  const [speed, setSpeed] = useState(Speeds.slow);
 
-      const timer = setTimeout(() => {
-        const updatedCardData = cardData.map((cardItem) => {
-          if (cardItem.id === firstCard.id || cardItem.id === secondCard.id) {
-            return {
-              ...cardItem,
-              isFlipped: match,
-            };
-          }
-          return cardItem;
-        });
+  const [cardData, setCardData] = useState(generateCardData(level));
+  const [flippedCard, setFlippedCard] = useState(null);
 
-        setCardData(updatedCardData);
-        setFlippedCards([]);
-        setIsClickable(true);
-      }, 500);
+  const handleStartGame = () => {
+    setGameStarted(true);
+  };
 
-      return () => clearTimeout(timer);
-    }
-  }, [flippedCards, cardData]);
+  const handleNewGame = () => {
+    setGameStarted(false);
+    const newCardData = generateCardData(level);
+    setCardData(newCardData);
+    setFlippedCard(null);
+  };
 
   const handleCardClick = (card) => {
-    if (isClickable && !card.isFlipped && flippedCards.length < 2) {
-      const updatedCardData = cardData.map((cardItem) => ({
-        ...cardItem,
-        isFlipped: cardItem.id === card.id ? true : cardItem.isFlipped,
-      }));
-
-      setCardData(updatedCardData);
-      setFlippedCards((prevFlippedCards) => [...prevFlippedCards, card]);
-
-      if (flippedCards.length === 1) {
-        setIsClickable(false);
-      }
+    // if we clicked on the same card, don't take any action
+    if (flippedCard && card.id === flippedCard.id) {
+      return;
     }
+
+    // if there's already 2 cards that's flipped, we don't take any actions
+    const numberOfFlippedCards = cardData.filter(
+      (cardItem) => cardItem.isFlipped
+    ).length;
+    if (numberOfFlippedCards >= 2) {
+      return;
+    }
+
+    // update the card data to flip the card
+    const updatedCardData = cardData.map((cardItem) => {
+      if (cardItem.id === card.id) {
+        return {
+          ...cardItem,
+          isFlipped: true,
+        };
+      }
+      // return the cardItem as is
+      return cardItem;
+    });
+    setCardData(updatedCardData);
+
+    // if there's no flippedCard yet, we're gonna update that, and that's it
+    if (!flippedCard) {
+      setFlippedCard(card);
+      return;
+    }
+
+    // handle the situation where there's already a flippedCard
+    if (flippedCard.imageUrl === card.imageUrl) {
+      // match
+      const updatedCardData = cardData.map((cardItem) => {
+        if (cardItem.id === card.id || cardItem.id === flippedCard.id) {
+          return {
+            ...cardItem,
+            isMatched: true,
+            isFlipped: false,
+          };
+        }
+        // return the cardItem as is
+        return cardItem;
+      });
+
+      setTimeout(() => {
+        setCardData(updatedCardData);
+      }, speed);
+    } else {
+      // no match
+      // reset the data back to original
+      const updatedCardData = cardData.map((cardItem) => {
+        return {
+          ...cardItem,
+          isFlipped: false,
+        };
+      });
+
+      setTimeout(() => {
+        setCardData(updatedCardData);
+      }, speed);
+    }
+    // rest
+    setFlippedCard(null);
+  };
+
+  const handleLevelChange = (newLevel) => {
+    setLevel(newLevel);
+    const newCardData = generateCardData(newLevel);
+    setCardData(newCardData);
   };
 
   return (
     <CardDataContext.Provider
       value={{
-        numberOfCards,
+        gameStarted,
+        numberOfCards: level,
         cardData,
+        level,
+        speed,
+        handleLevelChange,
+        setSpeed,
+        handleStartGame,
+        handleNewGame,
         handleCardClick,
       }}
     >

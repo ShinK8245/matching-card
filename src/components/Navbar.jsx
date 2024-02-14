@@ -1,9 +1,12 @@
-import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material";
-import React from "react";
+import { AppBar, Button, IconButton, Toolbar } from "@mui/material";
+import React, { useContext } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { lime } from "@mui/material/colors";
+import { CardDataContext } from "../context/CardDataContext";
 
 const Navbar = () => {
+  const { handleNewGame } = useContext(CardDataContext);
+
   return (
     <AppBar position="static" sx={{ bgcolor: lime[800] }}>
       <Toolbar>
@@ -16,10 +19,9 @@ const Navbar = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          FLIP MATCH
-        </Typography>
-        <Button color="inherit">Login</Button>
+        <Button color="inherit" sx={{ mx: 1 }} onClick={handleNewGame}>
+          New Game
+        </Button>
       </Toolbar>
     </AppBar>
   );

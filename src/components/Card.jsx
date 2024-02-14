@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react";
 import { CardDataContext } from "../context/CardDataContext";
 
 const Card = ({ data }) => {
-  const { isFlipped, isMatched } = data;
+  const { imageUrl, isFlipped, isMatched } = data;
   const { handleCardClick } = useContext(CardDataContext);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
@@ -38,7 +38,7 @@ const Card = ({ data }) => {
         transition: "transform 0.5s ease-out",
         zIndex: isFlipped ? "auto" : 1,
         bgcolor: isMatched ? "transparent" : isFlipped ? "none" : "white",
-        filter: isMatched ? "grayscale(100%)" : "none",
+        filter: isMatched ? "brightness(70%)" : "none",
         opacity: isMatched ? 0.5 : 1,
         "&:hover": {
           bgcolor: isFlipped || isMatched ? "none" : lime[200],
@@ -53,7 +53,7 @@ const Card = ({ data }) => {
           style={{
             height: "100%",
             width: "100%",
-            background: `url(${data.imageUrl})`,
+            background: `url(${imageUrl})`,
             backgroundSize: "cover",
             transform: isMatched ? "rotateY(0deg)" : "rotateY(180deg)",
           }}
