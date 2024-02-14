@@ -17,7 +17,7 @@ const Navbar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          News
+          FLIP MATCH
         </Typography>
         <Button color="inherit">Login</Button>
       </Toolbar>
