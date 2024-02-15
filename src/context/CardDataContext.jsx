@@ -19,6 +19,11 @@ const CardDataContextProvider = ({ children }) => {
   const [diffMinutes, setDiffMinutes] = useState(0);
   const [diffHours, setDiffHours] = useState(0);
 
+  const [counter, setCounter] = useState({
+    steps: 0,
+    moves: 0,
+  });
+
   useEffect(() => {
     const numberOfUnmatchedCards = cardData.filter(
       (cardItem) => !cardItem.isMatched
@@ -33,10 +38,17 @@ const CardDataContextProvider = ({ children }) => {
     setStartedTimeStamp(new Date());
     setGameStarted(true);
     setGameCompleted(false);
+    const newCardData = generateCardData(level);
+    setCardData(newCardData);
+    setFlippedCard(null);
+    setDiffSeconds(0);
+    setDiffMinutes(0);
+    setDiffHours(0);
   };
 
   const handleNewGame = () => {
     setGameStarted(false);
+    setGameCompleted(false);
     const newCardData = generateCardData(level);
     setCardData(newCardData);
     setFlippedCard(null);
@@ -55,6 +67,13 @@ const CardDataContextProvider = ({ children }) => {
     if (numberOfFlippedCards >= 2) {
       return;
     }
+
+    setCounter((prev) => {
+      return {
+        steps: prev.steps + 1,
+        moves: (prev.steps + 1) % 2 === 0 ? prev.moves + 1 : prev.moves,
+      };
+    });
 
     // update the card data to flip the card
     const updatedCardData = cardData.map((cardItem) => {
@@ -126,6 +145,7 @@ const CardDataContextProvider = ({ children }) => {
         cardData,
         level,
         speed,
+        moves: counter.moves,
 
         startedTimeStamp,
         diffSeconds,

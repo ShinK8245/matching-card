@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { CardGrid } from "./components/CardGrid";
 import Navbar from "./components/Navbar";
-import { StartGame } from "./components/StartGame";
 import { CardDataContext } from "./context/CardDataContext";
 import { Box } from "@mui/material";
 import { GameCompletion } from "./components/GameCompletion";
+import { StartGameSetup } from "./components/StartGameSetup";
 
 function App() {
   const { gameStarted, gameCompleted } = useContext(CardDataContext);
@@ -12,10 +12,10 @@ function App() {
   return (
     <>
       <Navbar />
-      <Box id="main-container" display="flex" justifyContent="center" mt={5}>
+      <Box id="main-container" display="flex" justifyContent="center" my={5}>
         {gameStarted && <CardGrid />}
         {gameCompleted && <GameCompletion />}
-        {!gameStarted && !gameCompleted && <StartGame />}
+        {!gameStarted && !gameCompleted && <StartGameSetup />}
       </Box>
     </>
   );

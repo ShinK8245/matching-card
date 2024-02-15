@@ -5,7 +5,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { CardDataContext } from "../context/CardDataContext";
 
 const GameCompletion = () => {
-  const { handleStartGame, diffSeconds, diffMinutes, diffHours } =
+  const { handleStartGame, diffSeconds, diffMinutes, diffHours, moves } =
     useContext(CardDataContext);
 
   const time = `${diffHours}h ${diffMinutes}m ${diffSeconds}s`;
@@ -17,7 +17,7 @@ const GameCompletion = () => {
       <Typography color="white">You've done it</Typography>
       <Box>
         <Typography color="white">Time: {time}</Typography>
-        {/* <Typography color="white">Moves: {moves}</Typography> */}
+        <Typography color="white">Moves: {moves}</Typography>
       </Box>
       <Button
         variant="contained"

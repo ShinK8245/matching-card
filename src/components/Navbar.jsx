@@ -4,6 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { lime } from "@mui/material/colors";
 import { CardDataContext } from "../context/CardDataContext";
 import { Timer } from "./Timer";
+import { MoveCounter } from "./MoveCounter";
 
 const Navbar = () => {
   const { handleNewGame, gameStarted, gameCompleted } =
@@ -26,8 +27,13 @@ const Navbar = () => {
             NEW GAME
           </Button>
         </Box>
-        <Box id="navbar-right">
-          {gameStarted && !gameCompleted && <Timer />}
+        <Box id="navbar-right" display="flex" gap={2} alignItems="center">
+          {gameStarted && !gameCompleted && (
+            <>
+              <MoveCounter />
+              <Timer />
+            </>
+          )}
         </Box>
       </Toolbar>
     </AppBar>
