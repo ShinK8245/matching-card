@@ -105,6 +105,7 @@ const StartGame = () => {
         variant="contained"
         sx={{
           bgcolor: grey[300],
+          borderRadius: 3,
           color: "black",
           "&:hover": {
             bgcolor: grey[50],
