@@ -6,7 +6,8 @@ import { CardDataContext } from "../context/CardDataContext";
 import { Timer } from "./Timer";
 
 const Navbar = () => {
-  const { handleNewGame } = useContext(CardDataContext);
+  const { handleNewGame, gameStarted, gameCompleted } =
+    useContext(CardDataContext);
 
   return (
     <AppBar position="static" sx={{ bgcolor: lime[800] }}>
@@ -26,7 +27,7 @@ const Navbar = () => {
           </Button>
         </Box>
         <Box id="navbar-right">
-          <Timer />
+          {gameStarted && !gameCompleted && <Timer />}
         </Box>
       </Toolbar>
     </AppBar>

@@ -1,11 +1,15 @@
 import { Box, Button, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import React from "react";
+import React, { useContext } from "react";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import { CardDataContext } from "../context/CardDataContext";
 
 const GameCompletion = () => {
-  const time = "22s";
-  const moves = 15;
+  const { handleStartGame, diffSeconds, diffMinutes, diffHours } =
+    useContext(CardDataContext);
+
+  const time = `${diffHours}h ${diffMinutes}m ${diffSeconds}s`;
+  //   const moves = 15;
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
@@ -13,7 +17,7 @@ const GameCompletion = () => {
       <Typography color="white">You've done it</Typography>
       <Box>
         <Typography color="white">Time: {time}</Typography>
-        <Typography color="white">Moves: {moves}</Typography>
+        {/* <Typography color="white">Moves: {moves}</Typography> */}
       </Box>
       <Button
         variant="contained"
@@ -26,7 +30,7 @@ const GameCompletion = () => {
           },
         }}
         endIcon={<RestartAltIcon />}
-        // onClick={handleStartGame}
+        onClick={handleStartGame}
       >
         Play Again
       </Button>
