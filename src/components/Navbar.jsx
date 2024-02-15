@@ -27,6 +27,7 @@ const Navbar = () => {
             NEW GAME
           </Button>
         </Box>
+
         <Box id="navbar-right" display="flex" gap={2} alignItems="center">
           {gameStarted && !gameCompleted && (
             <>

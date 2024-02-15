@@ -3,13 +3,13 @@ import { grey } from "@mui/material/colors";
 import React, { useContext } from "react";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { CardDataContext } from "../context/CardDataContext";
+import Confetti from "react-confetti";
 
 const GameCompletion = () => {
   const { handleStartGame, diffSeconds, diffMinutes, diffHours, moves } =
     useContext(CardDataContext);
 
   const time = `${diffHours}h ${diffMinutes}m ${diffSeconds}s`;
-  //   const moves = 15;
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
@@ -19,6 +19,13 @@ const GameCompletion = () => {
         <Typography color="white">Time: {time}</Typography>
         <Typography color="white">Moves: {moves}</Typography>
       </Box>
+      <Confetti
+        numberOfPieces={2000} // You can adjust the number of confetti pieces
+        recycle={false}
+        gravity={0.1}
+        width={window.innerWidth}
+        height={window.innerHeight}
+      />
       <Button
         variant="contained"
         sx={{
