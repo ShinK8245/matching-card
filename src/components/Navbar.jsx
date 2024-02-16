@@ -1,4 +1,11 @@
-import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import React, { useContext } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { lime } from "@mui/material/colors";
@@ -27,6 +34,17 @@ const Navbar = () => {
             NEW GAME
           </Button>
         </Box>
+        <Typography
+          variant="h6"
+          color="inherit"
+          sx={{
+            flexGrow: 1,
+            textAlign: gameStarted ? "center" : "right",
+            marginRight: gameStarted ? 5 : 0,
+          }}
+        >
+          FLIP MATCH
+        </Typography>
 
         <Box id="navbar-right" display="flex" gap={2} alignItems="center">
           {gameStarted && !gameCompleted && (

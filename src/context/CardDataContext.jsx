@@ -44,6 +44,10 @@ const CardDataContextProvider = ({ children }) => {
     setDiffSeconds(0);
     setDiffMinutes(0);
     setDiffHours(0);
+    setCounter({
+      steps: 0,
+      moves: 0,
+    });
   };
 
   const handleNewGame = () => {
