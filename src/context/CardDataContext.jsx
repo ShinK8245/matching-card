@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { generateCardData } from "../utils";
+import { generateCardData, generateRandomNumber } from "../utils";
 import { Levels, Speeds } from "../constants";
 
 const CardDataContext = createContext();
@@ -11,7 +11,9 @@ const CardDataContextProvider = ({ children }) => {
   const [level, setLevel] = useState(Levels["4x4"]);
   const [speed, setSpeed] = useState(Speeds.slow);
 
-  const [cardData, setCardData] = useState(generateCardData(level));
+  const [cardData, setCardData] = useState(
+    generateCardData(level.numberOfCards)
+  );
   const [flippedCard, setFlippedCard] = useState(null);
 
   const [startedTimeStamp, setStartedTimeStamp] = useState(null);
@@ -38,7 +40,7 @@ const CardDataContextProvider = ({ children }) => {
     setStartedTimeStamp(new Date());
     setGameStarted(true);
     setGameCompleted(false);
-    const newCardData = generateCardData(level);
+    const newCardData = generateCardData(level.numberOfCards);
     setCardData(newCardData);
     setFlippedCard(null);
     setDiffSeconds(0);
@@ -53,7 +55,7 @@ const CardDataContextProvider = ({ children }) => {
   const handleNewGame = () => {
     setGameStarted(false);
     setGameCompleted(false);
-    const newCardData = generateCardData(level);
+    const newCardData = generateCardData(level.numberOfCards);
     setCardData(newCardData);
     setFlippedCard(null);
   };
@@ -136,8 +138,30 @@ const CardDataContextProvider = ({ children }) => {
 
   const handleLevelChange = (newLevel) => {
     setLevel(newLevel);
-    const newCardData = generateCardData(newLevel);
+    const newCardData = generateCardData(newLevel.numberOfCards);
     setCardData(newCardData);
+  };
+
+  const handleHintClick = () => {
+    const hintableCards = cardData.filter(
+      (cardItem) => !cardItem.isMatched || !cardItem.hint
+    );
+    const randomIndex = generateRandomNumber(hintableCards.length) - 1;
+    const targetCard = hintableCards[randomIndex];
+
+    const updatedCardData = cardData.map((cardItem) => {
+      if (cardItem.imageUrl === targetCard.imageUrl) {
+        return {
+          ...cardItem,
+          hint: true,
+        };
+      }
+      return cardItem;
+    });
+    setCardData(updatedCardData);
+    setTimeout(() => {
+      setCardData(updatedCardData);
+    }, 300);
   };
 
   return (
@@ -145,11 +169,12 @@ const CardDataContextProvider = ({ children }) => {
       value={{
         gameStarted,
         gameCompleted,
-        numberOfCards: level,
+        numberOfCards: level.numberOfCards,
         cardData,
         level,
         speed,
         moves: counter.moves,
+        maxNumberOfHints: level.hints,
 
         startedTimeStamp,
         diffSeconds,
@@ -159,6 +184,7 @@ const CardDataContextProvider = ({ children }) => {
         diffHours,
         setDiffHours,
 
+        handleHintClick,
         handleLevelChange,
         setSpeed,
         handleStartGame,

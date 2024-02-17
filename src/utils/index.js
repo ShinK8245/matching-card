@@ -1,15 +1,15 @@
+const generateRandomNumber = (max) => {
+  return Math.floor(Math.random() * max + 1);
+};
+
 const generateCardData = (numberOfCards) => {
   const numberOfImages = numberOfCards / 2;
-
-  const generateRandomNumber = () => {
-    return Math.floor(Math.random() * 50 + 1);
-  };
 
   let imageIds = [];
 
   //while we don't have enough random image Ids, keep generating
   while (imageIds.length < numberOfImages) {
-    const randomNumber = generateRandomNumber();
+    const randomNumber = generateRandomNumber(50);
 
     if (!imageIds.includes(randomNumber)) {
       imageIds.push(randomNumber);
@@ -32,4 +32,4 @@ const generateCardData = (numberOfCards) => {
   return cardData;
 };
 
-export { generateCardData };
+export { generateCardData, generateRandomNumber };

@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react";
 import { CardDataContext } from "../context/CardDataContext";
 
 const Card = ({ data }) => {
-  const { imageUrl, isFlipped, isMatched } = data;
+  const { imageUrl, isFlipped, isMatched, hint } = data;
   const { handleCardClick } = useContext(CardDataContext);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
@@ -37,17 +37,35 @@ const Card = ({ data }) => {
           : `rotateX(${rotation.y}deg) rotateY(${rotation.x}deg)`,
         transition: "transform 0.5s ease-out",
         zIndex: isFlipped ? "auto" : 1,
-        bgcolor: isMatched ? "transparent" : isFlipped ? "none" : "white",
+        bgcolor: isMatched
+          ? "transparent"
+          : isFlipped
+          ? "none"
+          : hint
+          ? lime[200]
+          : "white",
         filter: isMatched ? "brightness(70%)" : "none",
         opacity: isMatched ? 0.5 : 1,
         "&:hover": {
           bgcolor: isFlipped || isMatched ? "none" : lime[200],
         },
+        ...(hint ? hintAnimation : {}),
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={() => handleCardClick(data)}
     >
+      {!isFlipped && !isMatched && (
+        <Box
+          style={{
+            height: "100%",
+            width: "100%",
+            background: `url(/question/question.png)`,
+            backgroundSize: "cover",
+          }}
+        ></Box>
+      )}
+
       {isFlipped || isMatched ? (
         <Box
           style={{
@@ -64,3 +82,8 @@ const Card = ({ data }) => {
 };
 
 export default Card;
+
+const hintAnimation = {
+  animationName: "wiggle",
+  animationDuration: "0.3s",
+};

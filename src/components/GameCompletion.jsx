@@ -12,8 +12,8 @@ const GameCompletion = () => {
   const time = `${diffHours}h ${diffMinutes}m ${diffSeconds}s`;
 
   useEffect(() => {
-    const audio = new Audio("/sounds/finish.wav");
-    audio.play();
+    const bgmEffect = new Audio("/sounds/finish.wav");
+    bgmEffect.play();
   }, []);
 
   return (
