@@ -42,7 +42,7 @@ const Card = ({ data }) => {
           : isFlipped
           ? "none"
           : hint
-          ? lime[200]
+          ? lime[300]
           : "white",
         filter: isMatched ? "brightness(70%)" : "none",
         opacity: isMatched ? 0.5 : 1,

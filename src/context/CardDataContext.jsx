@@ -20,6 +20,7 @@ const CardDataContextProvider = ({ children }) => {
   const [diffSeconds, setDiffSeconds] = useState(0);
   const [diffMinutes, setDiffMinutes] = useState(0);
   const [diffHours, setDiffHours] = useState(0);
+  const [penaltyTime, setPenaltyTime] = useState(0);
 
   const [counter, setCounter] = useState({
     steps: 0,
@@ -50,6 +51,7 @@ const CardDataContextProvider = ({ children }) => {
       steps: 0,
       moves: 0,
     });
+    setPenaltyTime(0);
   };
 
   const handleNewGame = () => {
@@ -143,6 +145,8 @@ const CardDataContextProvider = ({ children }) => {
   };
 
   const handleHintClick = () => {
+    setPenaltyTime((prev) => prev + 3);
+
     const hintableCards = cardData.filter(
       (cardItem) => !cardItem.isMatched || !cardItem.hint
     );
@@ -183,6 +187,7 @@ const CardDataContextProvider = ({ children }) => {
         setDiffMinutes,
         diffHours,
         setDiffHours,
+        penaltyTime,
 
         handleHintClick,
         handleLevelChange,

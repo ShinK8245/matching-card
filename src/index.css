@@ -10,15 +10,15 @@ body {
   }
   25% {
     transform: rotate(3deg);
-    scale: 110%;
+    scale: 115%;
   }
   50% {
     transform: rotate(-3deg);
-    scale: 110%;
+    scale: 115%;
   }
   75% {
     transform: rotate(3deg);
-    scale: 110%;
+    scale: 115%;
   }
   100% {
     transform: rotate(0deg);

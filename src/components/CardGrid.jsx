@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Alert, Box, Button, Snackbar } from "@mui/material";
 import Card from "./Card";
 import { useContext, useState } from "react";
 import { CardDataContext } from "../context/CardDataContext";
@@ -9,8 +9,11 @@ const CardGrid = () => {
   const { numberOfCards, cardData, handleHintClick, maxNumberOfHints } =
     useContext(CardDataContext);
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
   const [hints, setHints] = useState(maxNumberOfHints);
   const onHintClick = () => {
+    setOpenSnackbar(true);
     setHints((prev) => prev - 1);
     handleHintClick();
   };
@@ -37,6 +40,23 @@ const CardGrid = () => {
       >
         Hint ({`${hints} left`})
       </Button>
+
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={1500}
+        open={openSnackbar}
+        onClose={() => setOpenSnackbar(false)}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          3 seconds added to a penalty time!
+        </Alert>
+      </Snackbar>
+
       <Box
         id="card-container"
         sx={{

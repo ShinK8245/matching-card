@@ -38,7 +38,9 @@ const Navbar = () => {
           variant="h6"
           color="inherit"
           sx={{
-            flexGrow: 1,
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
             textAlign: gameStarted ? "center" : "right",
             marginRight: gameStarted ? 5 : 0,
           }}
