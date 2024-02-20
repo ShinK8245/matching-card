@@ -81,7 +81,7 @@ const Card = ({ data }) => {
   );
 };
 
-export default Card;
+export { Card };
 
 const hintAnimation = {
   animationName: "wiggle",
