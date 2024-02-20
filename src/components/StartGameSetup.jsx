@@ -5,6 +5,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import React, { useContext } from "react";
 import { CardDataContext } from "../context/CardDataContext";
@@ -18,6 +19,8 @@ const StartGameSetup = () => {
     speed,
     handleLevelChange: setLevel,
     setSpeed,
+    userName,
+    updateUserName,
   } = useContext(CardDataContext);
 
   return (
@@ -30,6 +33,18 @@ const StartGameSetup = () => {
       }}
     >
       <Box id="level-container">
+        {userName && (
+          <Box mb={2}>
+            <Typography
+              variant="h6"
+              color="white"
+            >{`Are you ready, ${userName}!`}</Typography>
+            <Box display="flex" alignItems="center" color="white" gap={2}>
+              <Typography>Not you?</Typography>
+              <Button onClick={() => updateUserName("")}>Switch User</Button>
+            </Box>
+          </Box>
+        )}
         <FormLabel id="levels-buttons-group-label" sx={{ color: "white" }}>
           Game Grid Level
         </FormLabel>

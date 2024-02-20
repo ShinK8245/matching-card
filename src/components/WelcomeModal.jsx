@@ -17,6 +17,7 @@ const WelcomeModal = () => {
     if (currentUserNameValue) {
       updateUserName(currentUserNameValue);
       playBackgroundMusic();
+      setUserNameInputValue("");
     } else {
       setHasError(true);
     }
@@ -37,10 +38,13 @@ const WelcomeModal = () => {
         sx={{
           bgcolor: grey[200],
           borderRadius: 3,
-          p: 2.5,
+          paddingTop: 4,
+          paddingLeft: 3,
+          paddingRight: 3,
+          paddingBottom: 3,
           display: "flex",
           flexDirection: "column",
-          gap: 1,
+          gap: 2,
         }}
       >
         <Typography variant="h6">Hi there! 👋</Typography>
