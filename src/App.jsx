@@ -5,6 +5,7 @@ import { CardDataContext } from "./context/CardDataContext";
 import { Box } from "@mui/material";
 import { GameCompletion } from "./components/GameCompletion";
 import { StartGameSetup } from "./components/StartGameSetup";
+import { WelcomeModal } from "./components/WelcomeModal";
 
 function App() {
   const { gameStarted, gameCompleted } = useContext(CardDataContext);
@@ -17,6 +18,7 @@ function App() {
         {gameCompleted && <GameCompletion />}
         {!gameStarted && !gameCompleted && <StartGameSetup />}
       </Box>
+      <WelcomeModal />
     </>
   );
 }
