@@ -19,6 +19,7 @@ const CardDataContextProvider = ({ children }) => {
     generateCardData(level.numberOfCards)
   );
   const [flippedCard, setFlippedCard] = useState(null);
+  const [cardDataUpdating, setCardDataUpdating] = useState(false);
 
   const [startedTimeStamp, setStartedTimeStamp] = useState(null);
   const [diffSeconds, setDiffSeconds] = useState(0);
@@ -105,6 +106,8 @@ const CardDataContextProvider = ({ children }) => {
       setFlippedCard(card);
       return;
     }
+    // start processing the filpped cards
+    setCardDataUpdating(true);
 
     // handle the situation where there's already a flippedCard
     if (flippedCard.imageUrl === card.imageUrl) {
@@ -124,6 +127,7 @@ const CardDataContextProvider = ({ children }) => {
       setTimeout(() => {
         playSuccessSound();
         setCardData(updatedCardData);
+        setCardDataUpdating(false);
       }, speed);
     } else {
       // no match
@@ -138,6 +142,7 @@ const CardDataContextProvider = ({ children }) => {
       setTimeout(() => {
         playFailedSound();
         setCardData(updatedCardData);
+        setCardDataUpdating(false);
       }, speed);
     }
     // rest
@@ -181,6 +186,7 @@ const CardDataContextProvider = ({ children }) => {
         gameCompleted,
         numberOfCards: level.numberOfCards,
         cardData,
+        cardDataUpdating,
         level,
         speed,
         moves: counter.moves,

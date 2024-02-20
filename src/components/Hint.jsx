@@ -7,7 +7,7 @@ import { CardDataContext } from "../context/CardDataContext";
 import { SoundContext } from "../context/SoundContext";
 
 const Hint = () => {
-  const { playHintSound } = useContext(SoundContext);
+  const { playHintSound, cardDataUpdating } = useContext(SoundContext);
 
   const { handleHintClick, maxNumberOfHints } = useContext(CardDataContext);
 
@@ -27,7 +27,7 @@ const Hint = () => {
         color="primary"
         startIcon={<TipsAndUpdatesIcon />}
         onClick={onHintClick}
-        disabled={hints === 0}
+        disabled={hints === 0 || cardDataUpdating}
         sx={{
           borderRadius: 3,
           "&.Mui-disabled": {
