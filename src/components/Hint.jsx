@@ -8,10 +8,14 @@ import { CardDataContext } from "../context/CardDataContext";
 const Hint = () => {
   const { handleHintClick, maxNumberOfHints } = useContext(CardDataContext);
 
+  const [hintSoundEffect] = useState(new Audio("/assets/sounds/hint.mp3"));
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const [hints, setHints] = useState(maxNumberOfHints);
   const onHintClick = () => {
+    hintSoundEffect.load();
+    hintSoundEffect.play();
     setOpenSnackbar(true);
     setHints((prev) => prev - 1);
     handleHintClick();
