@@ -1,10 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import { generateCardData, generateRandomNumber } from "../utils";
 import { Levels, Speeds } from "../constants";
+import { useContext } from "react";
+import { SoundContext } from "./SoundContext";
 
 const CardDataContext = createContext();
 
 const CardDataContextProvider = ({ children }) => {
+  const { playSuccessSound, playFailedSound } = useContext(SoundContext);
+
   const [gameStarted, setGameStarted] = useState(false);
   const [gameCompleted, setGameCompleted] = useState(false);
 
@@ -118,6 +122,7 @@ const CardDataContextProvider = ({ children }) => {
       });
 
       setTimeout(() => {
+        playSuccessSound();
         setCardData(updatedCardData);
       }, speed);
     } else {
@@ -131,6 +136,7 @@ const CardDataContextProvider = ({ children }) => {
       });
 
       setTimeout(() => {
+        playFailedSound();
         setCardData(updatedCardData);
       }, speed);
     }
