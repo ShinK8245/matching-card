@@ -60,7 +60,7 @@ const Card = ({ data }) => {
           style={{
             height: "100%",
             width: "100%",
-            background: `url(/question/question.png)`,
+            background: `url(/assets/question/question.png)`,
             backgroundSize: "cover",
           }}
         ></Box>

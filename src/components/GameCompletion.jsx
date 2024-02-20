@@ -35,7 +35,7 @@ const GameCompletion = () => {
   const time = `${hours}h ${minutes}m ${seconds}s`;
 
   useEffect(() => {
-    const bgmEffect = new Audio("/sounds/finish.wav");
+    const bgmEffect = new Audio("/assets/sounds/finish.wav");
     bgmEffect.play();
   }, []);
 
