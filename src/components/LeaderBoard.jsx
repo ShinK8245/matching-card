@@ -15,7 +15,7 @@ import React, { useMemo } from "react";
 
 const LeaderBoard = ({ level, data }) => {
   const sortedRows = useMemo(() => {
-    return data.sort((a, b) => a.time - b.time).slice(0, 10);
+    return data.sort((a, b) => a.time - b.time).slice(0, 5);
   }, [data]);
 
   return (
@@ -30,13 +30,13 @@ const LeaderBoard = ({ level, data }) => {
       >
         {level} Leader Board
       </Typography>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ borderRadius: 3 }}>
         <Table sx={{ minWidth: 280 }}>
-          <TableHead sx={{ bgcolor: "primary.main" }}>
+          <TableHead sx={{ bgcolor: "primary.light" }}>
             <TableRow>
-              <TableCell>Ranking</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Time</TableCell>
+              <TableCell align="center">Rank</TableCell>
+              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Time</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -50,11 +50,11 @@ const LeaderBoard = ({ level, data }) => {
                   },
                 }}
               >
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" align="center">
                   {index + 1}
                 </TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell align="right">{row.time}</TableCell>
+                <TableCell align="center">{row.name}</TableCell>
+                <TableCell align="center">{row.time}</TableCell>
               </TableRow>
             ))}
           </TableBody>
