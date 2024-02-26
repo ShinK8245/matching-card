@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import React, { useContext } from "react";
 import { CardDataContext } from "../context/CardDataContext";
-import { grey } from "@mui/material/colors";
+import { grey, lime } from "@mui/material/colors";
 import { Levels, Speeds } from "../constants";
 
 const StartGameSetup = () => {
@@ -41,7 +41,12 @@ const StartGameSetup = () => {
             >{`Are you ready, ${userName}!`}</Typography>
             <Box display="flex" alignItems="center" color="white" gap={2}>
               <Typography>Not you?</Typography>
-              <Button onClick={() => updateUserName("")}>Switch User</Button>
+              <Button
+                onClick={() => updateUserName("")}
+                sx={{ color: lime[500] }}
+              >
+                Switch User
+              </Button>
             </Box>
           </Box>
         )}
