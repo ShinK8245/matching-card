@@ -1,39 +1,25 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
 import { lime } from "@mui/material/colors";
 import { CardDataContext } from "../context/CardDataContext";
 import { Timer } from "./Timer";
 import { MoveCounter } from "./MoveCounter";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const Navbar = () => {
-  const { handleNewGame, gameStarted, gameCompleted } =
-    useContext(CardDataContext);
+  const { gameStarted, gameCompleted } = useContext(CardDataContext);
 
   return (
     <>
       <AppBar position="static" sx={{ bgcolor: lime[800] }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Box id="navbar-left">
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Button color="inherit" sx={{ mx: 1 }} onClick={handleNewGame}>
-              NEW GAME
+          <Box id="navbar-left" display="flex" gap={2}>
+            <Button component={Link} to="/" color="inherit">
+              Home
+            </Button>
+
+            <Button component={Link} to="/leaderboard" color="inherit">
+              LeaderBoard
             </Button>
           </Box>
           <Typography

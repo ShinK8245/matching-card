@@ -5,11 +5,13 @@ import { CardDataContext } from "../context/CardDataContext";
 import { LeaderBoard } from "./LeaderBoard";
 import { Levels } from "../constants";
 import { grey } from "@mui/material/colors";
+import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import Confetti from "react-confetti";
 
 const GameCompletion = () => {
   const {
     handleStartGame,
+    handleNewGame,
     timeTakenDisplayValue,
     moves,
     level,
@@ -44,21 +46,38 @@ const GameCompletion = () => {
           width={window.innerWidth}
           height={window.innerHeight}
         />
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: grey[300],
-            borderRadius: 3,
-            color: "black",
-            "&:hover": {
-              bgcolor: grey[50],
-            },
-          }}
-          endIcon={<RestartAltIcon />}
-          onClick={handleStartGame}
-        >
-          Play Again
-        </Button>
+        <Box display="flex" gap={2}>
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: grey[300],
+              borderRadius: 3,
+              color: "black",
+              "&:hover": {
+                bgcolor: grey[50],
+              },
+            }}
+            endIcon={<SportsEsportsIcon />}
+            onClick={handleNewGame}
+          >
+            NEW GAME
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: grey[300],
+              borderRadius: 3,
+              color: "black",
+              "&:hover": {
+                bgcolor: grey[50],
+              },
+            }}
+            endIcon={<RestartAltIcon />}
+            onClick={handleStartGame}
+          >
+            Play Again
+          </Button>
+        </Box>
       </Box>
       <LeaderBoard level={level.label} data={leaderBoardData[level.label]} />
     </Box>
