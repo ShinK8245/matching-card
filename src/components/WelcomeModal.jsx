@@ -74,7 +74,7 @@ const WelcomeModal = () => {
             backgroundColor: lime[700],
             color: "black",
             fontWeight: "bold",
-            borderRadius: 5,
+            borderRadius: 10,
             padding: 9,
             borderColor: lime[700],
           }}

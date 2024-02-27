@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { CardDataContextProvider } from "./context/CardDataContext";
@@ -15,12 +16,14 @@ import "@fontsource/roboto/700.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <SoundContextProvider>
-      <CardDataContextProvider>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </CardDataContextProvider>
-    </SoundContextProvider>
+    <BrowserRouter>
+      <SoundContextProvider>
+        <CardDataContextProvider>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </CardDataContextProvider>
+      </SoundContextProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
