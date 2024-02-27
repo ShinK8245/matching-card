@@ -15,7 +15,11 @@ import React, { useMemo } from "react";
 
 const LeaderBoard = ({ level, data }) => {
   const sortedRows = useMemo(() => {
-    return data.sort((a, b) => a.time - b.time).slice(0, 5);
+    if (data && data.length > 0) {
+      return data.sort((a, b) => a.time - b.time).slice(0, 10);
+    } else {
+      return [];
+    }
   }, [data]);
 
   return (
@@ -40,23 +44,31 @@ const LeaderBoard = ({ level, data }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {sortedRows.map((row, index) => (
-              <TableRow
-                key={row.name}
-                sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                  "&:hover": {
-                    bgcolor: "rgba(0, 0, 0, 0.04)",
-                  },
-                }}
-              >
-                <TableCell component="th" scope="row" align="center">
-                  {index + 1}
+            {sortedRows.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={3} align="center">
+                  No records found
                 </TableCell>
-                <TableCell align="center">{row.name}</TableCell>
-                <TableCell align="center">{row.time}</TableCell>
               </TableRow>
-            ))}
+            ) : (
+              sortedRows.map((row, index) => (
+                <TableRow
+                  key={row.name}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    "&:hover": {
+                      bgcolor: "rgba(0, 0, 0, 0.04)",
+                    },
+                  }}
+                >
+                  <TableCell component="th" scope="row" align="center">
+                    {index + 1}
+                  </TableCell>
+                  <TableCell align="center">{row.name}</TableCell>
+                  <TableCell align="center">{row.time}</TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>

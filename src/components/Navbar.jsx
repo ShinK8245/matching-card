@@ -5,6 +5,8 @@ import { CardDataContext } from "../context/CardDataContext";
 import { Timer } from "./Timer";
 import { MoveCounter } from "./MoveCounter";
 import { Link, Outlet } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 
 const Navbar = () => {
   const { gameStarted, gameCompleted } = useContext(CardDataContext);
@@ -14,11 +16,21 @@ const Navbar = () => {
       <AppBar position="static" sx={{ bgcolor: lime[800] }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box id="navbar-left" display="flex" gap={2}>
-            <Button component={Link} to="/" color="inherit">
+            <Button
+              component={Link}
+              to="/"
+              color="inherit"
+              startIcon={<HomeIcon />}
+            >
               Home
             </Button>
 
-            <Button component={Link} to="/leaderboard" color="inherit">
+            <Button
+              component={Link}
+              to="/leaderboard"
+              color="inherit"
+              startIcon={<LeaderboardIcon />}
+            >
               LeaderBoard
             </Button>
           </Box>
@@ -46,8 +58,9 @@ const Navbar = () => {
           </Box>
         </Toolbar>
       </AppBar>
-
-      <Outlet />
+      <Box id="main-container" display="flex" justifyContent="center" my={5}>
+        <Outlet />
+      </Box>
     </>
   );
 };

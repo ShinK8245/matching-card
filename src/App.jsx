@@ -2,11 +2,13 @@ import { useContext } from "react";
 import { CardGrid } from "./components/CardGrid";
 import Navbar from "./components/Navbar";
 import { CardDataContext } from "./context/CardDataContext";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { GameCompletion } from "./components/GameCompletion";
 import { StartGameSetup } from "./components/StartGameSetup";
 import { WelcomeModal } from "./components/WelcomeModal";
 import { Route, Routes } from "react-router-dom";
+import LeaderboardPage from "./pages/Leaderboard";
+import SoundControl from "./components/SoundControl";
 
 function App() {
   const { gameStarted, gameCompleted } = useContext(CardDataContext);
@@ -19,24 +21,14 @@ function App() {
             index
             element={
               <>
-                <Box
-                  id="main-container"
-                  display="flex"
-                  justifyContent="center"
-                  my={5}
-                >
-                  {gameStarted && <CardGrid />}
-                  {gameCompleted && <GameCompletion />}
-                  {!gameStarted && !gameCompleted && <StartGameSetup />}
-                </Box>
+                {gameStarted && <CardGrid />}
+                {gameCompleted && <GameCompletion />}
+                {!gameStarted && !gameCompleted && <StartGameSetup />}
                 <WelcomeModal />
               </>
             }
           />
-          <Route
-            path="leaderboard"
-            element={<Typography color="white">LeaderBoard Screen</Typography>}
-          />
+          <Route path="leaderboard" element={<LeaderboardPage />} />
 
           <Route
             path="*"
@@ -44,6 +36,7 @@ function App() {
           />
         </Route>
       </Routes>
+      <SoundControl />
     </>
   );
 }
