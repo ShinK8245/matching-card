@@ -68,6 +68,7 @@ const Card = ({ data }) => {
             height: "100%",
             width: "100%",
             background: `${ASSETS_URL}/question/question.png`,
+
             backgroundSize: "cover",
           }}
         ></Box>
