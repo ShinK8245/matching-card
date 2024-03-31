@@ -1,3 +1,3 @@
-const ASSETS_URL = "https://shinkim-public.s3.amzonaws.com/flipmatch-assets";
+const ASSETS_URL = "https://shinkim-public.s3.amazonaws.com/flipmatch-assets";
 
 export { ASSETS_URL };
