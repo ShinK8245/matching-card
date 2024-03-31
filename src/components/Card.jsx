@@ -3,6 +3,7 @@ import { lime } from "@mui/material/colors";
 import React, { useContext, useState } from "react";
 import { CardDataContext } from "../context/CardDataContext";
 import theme from "../theme";
+import { ASSETS_URL } from "../constants/env";
 
 const Card = ({ data }) => {
   const { numberOfCards, handleCardClick } = useContext(CardDataContext);
@@ -11,7 +12,7 @@ const Card = ({ data }) => {
   const columns = Math.sqrt(numberOfCards);
   const cardWidth = tabletOrSmaller && columns > 6 ? "80px" : "100px";
 
-  const { imageUrl, isFlipped, isMatched, hint } = data;
+  const { isFlipped, isMatched, hint } = data;
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (event) => {
@@ -66,7 +67,7 @@ const Card = ({ data }) => {
           style={{
             height: "100%",
             width: "100%",
-            background: `url(/assets/question/question.png)`,
+            background: `${ASSETS_URL}/question/question.png`,
             backgroundSize: "cover",
           }}
         ></Box>
@@ -77,7 +78,8 @@ const Card = ({ data }) => {
           style={{
             height: "100%",
             width: "100%",
-            background: `url(${imageUrl})`,
+            background: `url(${ASSETS_URL})`,
+
             backgroundSize: "cover",
             transform: isMatched ? "rotateY(0deg)" : "rotateY(180deg)",
           }}
