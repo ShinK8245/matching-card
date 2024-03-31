@@ -1,5 +1,12 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import React, { useContext } from "react";
+import {
+  AppBar,
+  Box,
+  Button,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { lime } from "@mui/material/colors";
 import { CardDataContext } from "../context/CardDataContext";
 import { Timer } from "./Timer";
@@ -10,30 +17,33 @@ import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 
 const Navbar = () => {
   const { gameStarted, gameCompleted } = useContext(CardDataContext);
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   return (
     <>
       <AppBar position="static" sx={{ bgcolor: lime[800] }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Box id="navbar-left" display="flex" gap={2}>
-            <Button
-              component={Link}
-              to="/"
-              color="inherit"
-              startIcon={<HomeIcon />}
-            >
-              Home
-            </Button>
+          {!isMobile && (
+            <Box id="navbar-left" display="flex" gap={2}>
+              <Button
+                component={Link}
+                to="/"
+                color="inherit"
+                startIcon={<HomeIcon />}
+              >
+                Home
+              </Button>
 
-            <Button
-              component={Link}
-              to="/leaderboard"
-              color="inherit"
-              startIcon={<LeaderboardIcon />}
-            >
-              LeaderBoard
-            </Button>
-          </Box>
+              <Button
+                component={Link}
+                to="/leaderboard"
+                color="inherit"
+                startIcon={<LeaderboardIcon />}
+              >
+                LeaderBoard
+              </Button>
+            </Box>
+          )}
           <Typography
             variant="h6"
             color="inherit"

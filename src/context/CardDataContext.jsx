@@ -15,7 +15,7 @@ const CardDataContextProvider = ({ children }) => {
   const [gameCompleted, setGameCompleted] = useState(false);
 
   const [level, setLevel] = useState(Levels["4x4"]);
-  const [speed, setSpeed] = useState(Speeds.slow);
+  const [speed, setSpeed] = useState(Speeds.medium);
 
   const [cardData, setCardData] = useState(
     generateCardData(level.numberOfCards)

@@ -1,11 +1,17 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { lime } from "@mui/material/colors";
 import React, { useContext, useState } from "react";
 import { CardDataContext } from "../context/CardDataContext";
+import theme from "../theme";
 
 const Card = ({ data }) => {
+  const { numberOfCards, handleCardClick } = useContext(CardDataContext);
+  const tabletOrSmaller = useMediaQuery(theme.breakpoints.down("md"));
+
+  const columns = Math.sqrt(numberOfCards);
+  const cardWidth = tabletOrSmaller && columns > 6 ? "80px" : "100px";
+
   const { imageUrl, isFlipped, isMatched, hint } = data;
-  const { handleCardClick } = useContext(CardDataContext);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (event) => {
@@ -24,8 +30,8 @@ const Card = ({ data }) => {
 
   return (
     <Box
-      height={100}
-      width={100}
+      height={cardWidth}
+      width={cardWidth}
       borderRadius={3}
       sx={{
         position: "relative",
@@ -66,7 +72,7 @@ const Card = ({ data }) => {
         ></Box>
       )}
 
-      {isFlipped || isMatched ? (
+      {(isFlipped || isMatched) && (
         <Box
           style={{
             height: "100%",
@@ -76,7 +82,7 @@ const Card = ({ data }) => {
             transform: isMatched ? "rotateY(0deg)" : "rotateY(180deg)",
           }}
         ></Box>
-      ) : null}
+      )}
     </Box>
   );
 };

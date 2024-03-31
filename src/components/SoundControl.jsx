@@ -1,5 +1,13 @@
-import { Badge, Box, Button, IconButton, Popover, Slider } from "@mui/material";
 import React, { useContext, useState } from "react";
+import {
+  useMediaQuery,
+  Badge,
+  Box,
+  Button,
+  IconButton,
+  Popover,
+  Slider,
+} from "@mui/material";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeDownIcon from "@mui/icons-material/VolumeDown";
@@ -8,9 +16,9 @@ import { SoundContext } from "../context/SoundContext";
 const SoundControl = () => {
   const { volumeUp, volumeDown, toggleMute, volume, mute, updateVolume } =
     useContext(SoundContext);
-
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const isMobile = useMediaQuery("(max-width:600px)");
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -25,6 +33,9 @@ const SoundControl = () => {
   const handleVolumeChange = (_event, newVolume) => {
     updateVolume(newVolume);
   };
+
+  // Render nothing for mobile screens
+  if (isMobile) return null;
 
   return (
     <Box i="sound-control-container" position="fixed" left="0" bottom="0">
