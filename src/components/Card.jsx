@@ -12,7 +12,7 @@ const Card = ({ data }) => {
   const columns = Math.sqrt(numberOfCards);
   const cardWidth = tabletOrSmaller && columns > 6 ? "80px" : "100px";
 
-  const { imageUrl, isFlipped, isMatched, hint } = data;
+  const { isFlipped, isMatched, hint } = data;
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (event) => {
@@ -79,7 +79,7 @@ const Card = ({ data }) => {
           style={{
             height: "100%",
             width: "100%",
-            background: `url(${imageUrl})`,
+            background: `url(${ASSETS_URL})`,
 
             backgroundSize: "cover",
             transform: isMatched ? "rotateY(0deg)" : "rotateY(180deg)",
