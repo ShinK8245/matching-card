@@ -7,6 +7,7 @@ import { Levels } from "../constants";
 import { grey } from "@mui/material/colors";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import Confetti from "react-confetti";
+import { ASSETS_URL } from "../constants/env";
 
 const GameCompletion = () => {
   const {
@@ -26,7 +27,7 @@ const GameCompletion = () => {
   };
 
   useEffect(() => {
-    const bgmEffect = new Audio("/assets/sounds/finish.wav");
+    const bgmEffect = new Audio(`${ASSETS_URL}/sounds/finish.wav`);
     bgmEffect.play();
   }, []);
 

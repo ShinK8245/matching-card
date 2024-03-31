@@ -1,3 +1,5 @@
+import { ASSETS_URL } from "../constants/env";
+
 const generateRandomNumber = (max) => {
   return Math.floor(Math.random() * max + 1);
 };
@@ -23,7 +25,7 @@ const generateCardData = (numberOfCards) => {
   const cardData = imageIds.map((imageId, index) => {
     return {
       id: index + 1,
-      imageUrl: `/assets/images/${imageId}.png`,
+      imageUrl: `${ASSETS_URL}/images/${imageId}.png`,
       isFlipped: false,
       isMatched: false,
     };
